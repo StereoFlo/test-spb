@@ -1,5 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ dump(week) }}
+    <table>
+        <tr>
+            <th>Дата</th>
+            <th>Погода</th>
+        </tr>
+        {% for temp in  week %}
+            <tr>
+                <td>{{ temp.day }}.{{ temp.month }}.{{ temp.year }}</td>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Когда</th>
+                            <th>Температура от</th>
+                            <th>Температора до</th>
+                        </tr>
+                        {% for temp in temp.weatherTemp %}
+                            <tr>
+                                <td>{{ temp.name }}</td>
+                                <td>{{ temp.tempFrom }}</td>
+                                <td>{{ temp.tempTo }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

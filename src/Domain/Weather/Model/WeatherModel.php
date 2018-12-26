@@ -40,6 +40,6 @@ class WeatherModel
      */
     public function getWeek(): ?array
     {
-        return $this->weatherRepo->getWeek(Carbon::now()->year, Carbon::now()->month, Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek());
+        return $this->weatherRepo->getWeek(Carbon::now()->year, Carbon::now()->month, Carbon::now()->startOfWeek()->day, Carbon::now()->endOfWeek()->day);
     }
 }

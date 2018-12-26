@@ -60,6 +60,7 @@ class WeatherRepository extends AbstractRepository
     {
         return $this->manager
             ->createQueryBuilder()
+            ->select('weather')
             ->from(Weather::class, 'weather')
             ->where('weather.year = :year')
             ->andWhere('weather.month = :month')
