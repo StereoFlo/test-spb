@@ -4,5 +4,6 @@ services:
     arguments:
       - '@weather.repo'
       - '@weather.temp.repo'
+      - '@weather.parser'
     tags:
       - { name: console.command }

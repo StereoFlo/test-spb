@@ -13,6 +13,9 @@ Domain\Weather\Entity\Weather:
       columns: [ year, month, day ]
 
   fields:
+    cityName:
+      type: string
+      length: 50
     year:
       type: string
       length: 4

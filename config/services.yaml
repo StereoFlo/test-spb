@@ -25,3 +25,4 @@ imports:
     - { resource: 'services/repositories.yml' }
     - { resource: 'services/controllers.yml' }
     - { resource: 'services/models.yml' }
+    - { resource: 'services/infrastructure.yml' }

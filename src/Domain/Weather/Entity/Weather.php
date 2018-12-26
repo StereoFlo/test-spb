@@ -18,6 +18,11 @@ class Weather
     /**
      * @var string
      */
+    private $cityName;
+
+    /**
+     * @var string
+     */
     private $year;
 
     /**
@@ -109,6 +114,22 @@ class Weather
     {
         $this->day = $day;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCityName(): string
+    {
+        return $this->cityName;
+    }
+
+    /**
+     * @param string $cityName
+     */
+    public function setCityName(string $cityName)
+    {
+        $this->cityName = $cityName;
     }
 
     /**

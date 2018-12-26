@@ -1,0 +1,4 @@
+services:
+  weather.parser:
+    class: Infrastructure\Parser\WeatherParser
+    public: true
