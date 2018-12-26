@@ -1,5 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    dump(today)
+    <table>
+        <tr>
+            <th>Когда</th>
+            <th>Температура от</th>
+            <th>Температора до</th>
+        </tr>
+        {% for temp in today.weatherTemp %}
+            <tr>
+                <td>{{ temp.name }}</td>
+                <td>{{ temp.tempFrom }}</td>
+                <td>{{ temp.tempTo }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

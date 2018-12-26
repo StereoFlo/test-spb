@@ -23,3 +23,5 @@ imports:
     - { resource: 'parameters.yml' }
     - { resource: 'services/commands.yml' }
     - { resource: 'services/repositories.yml' }
+    - { resource: 'services/controllers.yml' }
+    - { resource: 'services/models.yml' }

@@ -1,7 +1,8 @@
 services:
-  abstract.ctrl:
-    class: Controller\AbstractController
+  Controller\AbstractController:
     public: true
 
-  weather.ctrl:
-    class: Controller\WeatherController
+  Controller\WeatherController:
+    arguments:
+      - '@weather.model'
+    parent: Controller\AbstractController

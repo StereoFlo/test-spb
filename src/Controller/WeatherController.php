@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Domain\Weather\Model\WeatherModel;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class WeatherController
@@ -25,13 +26,19 @@ class WeatherController extends AbstractController
         $this->weatherModel = $weatherModel;
     }
 
-    public function getDay()
+    /**
+     * @return Response
+     */
+    public function getDay(): Response
     {
         $today = $this->weatherModel->getToday();
         return $this->render('Weather/today.html.twig', ['today' => $today]);
     }
 
-    public function getWeek()
+    /**
+     * @return Response
+     */
+    public function getWeek(): Response
     {
         $week = $this->weatherModel->getWeek();
         return $this->render('Weather/week.html.twig', ['week' => $week]);
