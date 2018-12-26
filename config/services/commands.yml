@@ -1,0 +1,8 @@
+services:
+  weather.command:
+    class: Domain\Weather\Command\WeatherCommand
+    arguments:
+      - '@weather.repo'
+      - '@weather.temp.repo'
+    tags:
+      - { name: console.command }

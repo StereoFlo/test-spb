@@ -1,0 +1,7 @@
+services:
+  abstract.ctrl:
+    class: Controller\AbstractController
+    public: true
+
+  weather.ctrl:
+    class: Controller\WeatherController

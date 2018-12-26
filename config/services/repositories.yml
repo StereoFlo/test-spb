@@ -1,0 +1,15 @@
+services:
+  abstract.repo:
+    class: Domain\Shared\Repository\AbstractRepository
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    abstract: true
+    public: true
+
+  weather.repo:
+    class: Domain\Weather\Repository\WeatherRepository
+    parent: abstract.repo
+
+  weather.temp.repo:
+    class: Domain\Weather\Repository\WeatherTempRepository
+    parent: abstract.repo

@@ -1,0 +1,6 @@
+services:
+  weather.model:
+    class: Domain\Weather\Model\WeatherModel
+    arguments:
+      - '@weather.repo'
+    public: true

@@ -1,0 +1,5 @@
+index:
+    path: /
+    controller: Controller\WeatherController::getDay
+    path: /week
+    controller: Controller\WeatherController::getWeek

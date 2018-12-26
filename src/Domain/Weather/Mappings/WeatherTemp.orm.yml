@@ -1,0 +1,33 @@
+Domain\Weather\Entity\WeatherTemp:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+
+  fields:
+    weatherId:
+      type: integer
+      options:
+        unsigned: true
+    name:
+      type: string
+      length: 10
+    tempFrom:
+      type: string
+      length: 5
+    tempTo:
+      type: string
+      length: 5
+      nullabe: true
+
+  manyToOne:
+    weather:
+      targetEntity: Domain\Weather\Entity\Weather
+      inversedBy: order
+      joinColumn:
+        name: weather_id
+        referencedColumnName: id

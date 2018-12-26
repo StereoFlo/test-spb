@@ -1,0 +1,29 @@
+Domain\Weather\Entity\Weather:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+
+  indexes:
+    dateIndex:
+      columns: [ year, month, day ]
+
+  fields:
+    year:
+      type: string
+      length: 4
+    month:
+      type: string
+      length: 2
+    day:
+      type: string
+      length: 2
+
+  oneToMany:
+    weatherTemp:
+      targetEntity: Domain\Weather\Entity\WeatherTemp
+      mappedBy: weather
