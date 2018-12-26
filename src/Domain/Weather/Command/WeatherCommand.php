@@ -76,23 +76,30 @@ class WeatherCommand extends Command
                     $currentDay = $day->getNumber();
                     $weather = $this->weatherRepository->getByDate($year, $currentMonth, $currentDay);
                     if (empty($weather)) {
-                        $weather = new Weather();
-                        $weather->setMonth($currentMonth);
-                        $weather->setDay($currentDay);
-                        $weather->setYear($year);
-                        $weather->setCityName($this->weatherParser->getCityName());
-                        $this->weatherRepository->save($weather);
+                        $this->weatherRepository->startTransaction();
+                        try {
+                            $weather = new Weather();
+                            $weather->setMonth($currentMonth);
+                            $weather->setDay($currentDay);
+                            $weather->setYear($year);
+                            $weather->setCityName($this->weatherParser->getCityName());
+                            $this->weatherRepository->save($weather);
 
-                        $temp = [];
-                        foreach ($day->getHourTemp() as $hourTemp) {
+                            $temp = [];
+                            foreach ($day->getHourTemp() as $hourTemp) {
                                 $temp[] = (new WeatherTemp())
                                     ->setWeather($weather)
                                     ->setWeatherId($weather->getId())
                                     ->setName($hourTemp->getName())
                                     ->setTempFrom($hourTemp->getTempFrom())
                                     ->setTempTo($hourTemp->getTempTo());
+                            }
+                            $this->weatherTempRepository->saveMany($temp);
+                            $this->weatherRepository->commitTransaction();
+                        } catch (\Exception $exception) {
+                            $this->weatherRepository->rollbackTransaction();
+                            $output->writeln($exception->getMessage());
                         }
-                        $this->weatherTempRepository->saveMany($temp);
                     }
                 }
             }
