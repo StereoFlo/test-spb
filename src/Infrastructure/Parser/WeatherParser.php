@@ -145,12 +145,9 @@ class WeatherParser
      */
     protected function getTempTo($tr): ?string
     {
-        if ($tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(2)) {
-            return $tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(2)->nodeValue;
-        }
-        if (!$tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(1)) {
+        if (!$tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(2)) {
             return $tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(1)->nodeValue;
         }
-        return null;
+        return $tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(2)->nodeValue;
     }
 }
