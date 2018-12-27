@@ -15,9 +15,12 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class WeatherParser
 {
-    const DAY_DETAILS_CLASS         = 'forecast-details__day',
+    const DAY_DETAILS_CLASS       = 'forecast-details__day',
         DAY_DETAILS_CLASS_WEEKEND = 'forecast-details__day forecast-details__day_weekend',
-        DAY_INFO_CLASS            = 'forecast-details__day-info';
+        DAY_INFO_CLASS            = 'forecast-details__day-info',
+        MAIN_CONTAINER_CLASS      = '.forecast-details';
+
+    const URL = 'https://yandex.ru/pogoda/%s/details';
 
     /**
      * @var string
@@ -52,7 +55,7 @@ class WeatherParser
     public function getData(string $city = 'moscow'): array
     {
         $this->cityName = $city;
-        $crawler = new Crawler(file_get_contents('https://yandex.ru/pogoda/' . $city . '/details'));
+        $crawler = new Crawler(file_get_contents(sprintf(self::URL, $city)));
         $days = $this->getRawDays($crawler);
         $res = [];
         foreach ($days as $day) {
@@ -78,7 +81,7 @@ class WeatherParser
      */
     protected function getRawDays(Crawler $crawler): array
     {
-        $tempTable = $crawler->filter('.forecast-details');
+        $tempTable = $crawler->filter(self::MAIN_CONTAINER_CLASS);
         $attrs = [];
         foreach ($tempTable->children() as $item) {
             $className = $item->getAttribute('class');
