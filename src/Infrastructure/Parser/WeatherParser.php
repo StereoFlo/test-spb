@@ -15,6 +15,10 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class WeatherParser
 {
+    const DAY_DETAILS_CLASS         = 'forecast-details__day',
+        DAY_DETAILS_CLASS_WEEKEND = 'forecast-details__day forecast-details__day_weekend',
+        DAY_INFO_CLASS            = 'forecast-details__day-info';
+
     /**
      * @var string
      */
@@ -79,9 +83,9 @@ class WeatherParser
         foreach ($tempTable->children() as $item) {
             $className = $item->getAttribute('class');
             //todo это надо сделать красиво
-            if ($className !== 'forecast-details__day') {
-                if ($className !== 'forecast-details__day-info') {
-                    if ($className !== 'forecast-details__day forecast-details__day_weekend') {
+            if ($className !== self::DAY_DETAILS_CLASS) {
+                if ($className !== self::DAY_INFO_CLASS) {
+                    if ($className !== self::DAY_DETAILS_CLASS_WEEKEND) {
                         continue;
                     }
                 }
@@ -93,7 +97,7 @@ class WeatherParser
     }
 
     /**
-     * @param array $day
+     * @param \DOMElement[] $day
      *
      * @return void
      */
@@ -114,7 +118,7 @@ class WeatherParser
     }
 
     /**
-     * @param array $day
+     * @param \DOMElement[] $day
      *
      * @return Year
      */
@@ -139,11 +143,11 @@ class WeatherParser
     }
 
     /**
-     * @param $tr
+     * @param \DOMElement $tr
      *
      * @return string|null
      */
-    protected function getTempTo($tr): ?string
+    protected function getTempTo(\DOMElement $tr): ?string
     {
         if (!$tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(2)) {
             return $tr->childNodes->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(1)->nodeValue;
