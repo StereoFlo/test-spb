@@ -37,6 +37,10 @@ class WeatherCommand extends Command
      * @var WeatherParser
      */
     private $weatherParser;
+    /**
+     * @var string
+     */
+    private $city;
 
     /**
      * WeatherCommand constructor.
@@ -44,13 +48,15 @@ class WeatherCommand extends Command
      * @param WeatherRepository     $weatherRepository
      * @param WeatherTempRepository $weatherTempRepository
      * @param WeatherParser         $weatherParser
+     * @param string                $city
      */
-    public function __construct(WeatherRepository $weatherRepository, WeatherTempRepository $weatherTempRepository, WeatherParser $weatherParser)
+    public function __construct(WeatherRepository $weatherRepository, WeatherTempRepository $weatherTempRepository, WeatherParser $weatherParser, string $city)
     {
         parent::__construct();
         $this->weatherRepository = $weatherRepository;
         $this->weatherTempRepository = $weatherTempRepository;
         $this->weatherParser = $weatherParser;
+        $this->city = $city;
     }
 
     /**
@@ -63,7 +69,7 @@ class WeatherCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $res = $this->weatherParser->getData();
+        $res = $this->weatherParser->getData($this->city);
 
         /** @var Year $weather */
         foreach ($res as $weather) {
