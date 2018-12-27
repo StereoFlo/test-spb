@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p>Сегодня| <a href="{{ path('week') }}">На неделю</a> </p>
+    <p>Сегодня | <a href="{{ path('week') }}">На неделю</a> </p>
+    {% if today is not null %}
     <table>
         <tr>
             <th>Когда</th>
@@ -16,4 +17,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% else %}
+        <p>Погода на сегодня пока отсутствует</p>
+    {% endif %}
 {% endblock %}

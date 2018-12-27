@@ -2,6 +2,7 @@
 
 {% block body %}
     <p><a href="{{ path('index') }}">Сегодня</a> | На неделю </p>
+    {% if week is not empty %}
     <table>
         <tr>
             <th>Дата</th>
@@ -29,4 +30,7 @@
             </tr>
         {% endfor %}
     </table>
+    {% else %}
+        <p>Погода на неделю пока отсутствует</p>
+    {% endif %}
 {% endblock %}
