@@ -36,15 +36,15 @@ class WeatherModel
     }
 
     /**
-     * @return Weather[]|null
+     * @param string $year
+     * @param string $month
+     * @param string $startDay
+     * @param string $entDay
+     *
+     * @return array|null
      */
-    public function getWeek(): ?array
+    public function getPeriod(string $year, string $month, string $startDay, string $entDay): ?array
     {
-        $year = Carbon::now()->year;
-        $month = Carbon::now()->month;
-        $weekStart = Carbon::now()->startOfWeek(Carbon::MONDAY)->day;
-        $weekEnd   = Carbon::now()->endOfWeek(Carbon::SUNDAY)->day;
-
-        return $this->weatherRepo->getWeek($year, $month, $weekStart, $weekEnd);
+        return $this->weatherRepo->getWeek($year, $month, $startDay, $entDay);
     }
 }

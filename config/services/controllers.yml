@@ -1,6 +1,8 @@
 services:
   Controller\AbstractController:
     public: true
+    calls:
+      - [setRequest, ['@request_stack']]
 
   Controller\WeatherController:
     arguments:

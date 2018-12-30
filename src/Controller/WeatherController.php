@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Carbon\Carbon;
 use Domain\Weather\Model\WeatherModel;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,9 +39,14 @@ class WeatherController extends AbstractController
     /**
      * @return Response
      */
-    public function getWeek(): Response
+    public function getPeriod(): Response
     {
-        $week = $this->weatherModel->getWeek();
+        $year     = $this->request->get('year', Carbon::now()->year);
+        $month    = $this->request->get('month', Carbon::now()->month);
+        $startDay = $this->request->get('startDay', Carbon::now()->startOfWeek(Carbon::MONDAY)->day);
+        $endDay   = $this->request->get('endDay', Carbon::now()->endOfWeek(Carbon::SUNDAY)->day);
+
+        $week = $this->weatherModel->getPeriod($year, $month, $startDay, $endDay);
         return $this->render('Weather/week.html.twig', ['week' => $week]);
     }
 }
